@@ -44,20 +44,18 @@ export default {
   border-radius: 0px !important;
   display: block;
   z-index: 401;
-  overflow: hidden;
   // border-bottom: 1px solid #d8dce5;
   box-shadow: 0 1px 3px 0 rgba(0,0,0,.12), 0 0 3px 0 rgba(0,0,0,.04);
   opacity: $Opacity;
-  background-color: $gb-3;
-  // background: linear-gradient(top left, $gb-3, $gb-2);
-  // background: -webkit-linear-gradient(top left, $gb-3, $gb-2);
-  // background: -moz-linear-gradient(top left, $gb-3, $gb-2);
-  // background: -o-linear-gradient(top left, $gb-3, $gb-2);
+  background: linear-gradient(top left, $gb-3, $gb-2);
+  background: -webkit-linear-gradient(top left, $gb-3, $gb-2);
+  background: -moz-linear-gradient(top left, $gb-3, $gb-2);
+  background: -o-linear-gradient(top left, $gb-3, $gb-2);
   .hamburger-container {
-    line-height: 8.12vh;
+    line-height: 58px;
     height: 7vh;
     float: left;
-    padding: 0 1.4vh;
+    padding: 0 10px;
   }
   .breadcrumb-container{
     float: left;

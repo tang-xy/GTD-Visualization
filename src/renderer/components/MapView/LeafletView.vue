@@ -1,5 +1,5 @@
 <template>
-  <div :id="mapId" class="leaft-map-view"></div>
+  <div id="LMapView"></div>
 </template>
 
 <script>
@@ -8,27 +8,9 @@ import L from 'leaflet'
 export default {
   name: 'MapView',
   props: {
-    mapId: {
-      type: String,
-      required: true
-    },
     currentDailyData: {
       type: Array,
-      default: () => {
-        return []
-      }
-    },
-    zoom: {
-      type: Number,
-      default: 3
-    },
-    lng: {
-      type: Number,
-      default: 38
-    },
-    lat: {
-      type: Number,
-      default: 38
+      default: []
     }
   },
   data () {
@@ -36,21 +18,26 @@ export default {
       map: null,
       markerLayerGroup: new L.LayerGroup(),
       mapParams: {
+        mapContainer: 'LMapView',
+        initCenter: [38, 38],
         url: 'https://api.mapbox.com/styles/v1/hideinme/cjbd5v7f18sxz2rmxt2ewnqtt/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaGlkZWlubWUiLCJhIjoiY2o4MXB3eWpvNnEzZzJ3cnI4Z3hzZjFzdSJ9.FIWmaUbuuwT2Jl3OcBx1aQ',
         attribution: '© <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+        zoom: 2,
         minZoom: 1,
         maxZoom: 18
       }
     }
   },
+  computed: {
+  },
   components: {},
   mounted () {
-    const map = L.map(this.mapId,
+    const map = L.map(this.mapParams.mapContainer,
       {
         zoomControl: false,
         attributionControl: false
       })
-      .setView([this.lng, this.lat], this.zoom)
+      .setView(this.mapParams.initCenter, this.mapParams.zoom)
     L.tileLayer(this.mapParams.url, {
       attribution: this.mapParams.attribution,
       minZoom: this.mapParams.minZoom,
@@ -123,6 +110,16 @@ export default {
       var pointLayer = L.circleMarker([lat, lng], pointOptions)
       pointLayer.lifetime = 10
       layerGroup.addLayer(pointLayer)
+
+      // var point = L.icon({
+      //   iconUrl: 'static/icons/point.png',
+      //   iconSize: [10, 10],
+      //   iconAnchor: [5, 5],
+      //   className: 'single-point-marker' // define in globe styles
+      // })
+      // var pointLayer = L.marker([lat, lng], {icon: point})
+      // pointLayer.lifetime = 10
+      // layerGroup.addLayer(pointLayer)
     }
   }
 }
@@ -130,7 +127,12 @@ export default {
 
 <style lang="scss" scoped>
 @import url("../../../../node_modules/leaflet/dist/leaflet.css");
-.leaft-map-view {
+#LMapView {
+  // position: absolute;
+  // top: 0;
+  // bottom: 0;
+  // left: 0;
+  // right: 0;
   width: 100%;
   height: 100%;
   background-color: black;

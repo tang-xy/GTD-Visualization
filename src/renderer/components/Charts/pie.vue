@@ -312,9 +312,6 @@ export default {
     }
   },
   watch: {
-    data (newData, oldData) {
-      this.initChart()
-    },
     selectName (newSelect, oldSelect) {
       this.highlignt(newSelect)
       this.downplay(oldSelect)

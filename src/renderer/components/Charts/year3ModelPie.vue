@@ -58,8 +58,6 @@ export default {
         param.push(dic)
       }
       this.params = param
-
-      console.log(JSON.stringify(param))
     },
     send (param) {
       this.$emit('click-pie', param)
