@@ -1,5 +1,5 @@
 <template>
-<div class='time-analysis-container' v-loading="loading" element-loading-text="数据加载中...">
+<div class='time-analysis-container' v-loading="loading" element-loading-text="Loading data...">
   <div 
   class="fixed-normal datepicker-view"
   :class="{'fixed-silebar-visiable': sidebar.opened}">
@@ -17,6 +17,7 @@
    </el-date-picker>
   </div>
   <time-analysis-map-view
+  mapId="TimeAnalysisMapView"
   class="map-view"
   v-on:map-region-hover="selectElement" 
   v-on:map-region-click="clickListener"
@@ -27,7 +28,7 @@
   :displayMode="currentMode">
   </time-analysis-map-view>
   <transition name="right">
-  <region-count-bar 
+  <region-count-bar
   v-on:click-bar="clickListener" 
   v-on:over-bar="selectElement" 
   v-on:out-bar="unselectElement"

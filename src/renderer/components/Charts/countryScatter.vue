@@ -84,7 +84,6 @@ export default {
     endString (newEnd, oldEnd) {
       var res = []
       if (this.start >= newEnd) {
-        console.log('start time error!')
         return
       }
       for (var i = this.start; i < newEnd; i++) {
@@ -93,7 +92,7 @@ export default {
       this.timeList = res
     },
     selectId (newId, oldId) {
-      if (this.obj === {} || newId === -1) {
+      if (Object.keys(this.obj).length === 0 || newId === -1) {
         return
       }
       var d = this.dataList[this.getNameById(newId)]
@@ -103,12 +102,11 @@ export default {
   methods: {
 
     initChart () {
-      if (this.obj === {} || this.selectId === -1) {
+      if (Object.keys(this.obj).length === 0 || this.selectId === -1) {
         return
       }
       var res = []
       if (this.start >= this.end) {
-        console.log('start time error!')
         return
       }
       for (var k = this.start; k < this.end; k++) {
@@ -125,8 +123,6 @@ export default {
         }
         var nowTime = (list[i].properties.year - 1970) * 12 + list[i].properties.month - 1
         if (typeof (this.dataList[list[i].properties.country.countryName]) === 'undefined') {
-          // console.log(list[i].properties.country.countryName)
-          // console.log(JSON.stringify(this.dataList))
         } else { this.dataList[list[i].properties.country.countryName][this.getTimeValue(nowTime)]++ }
       }
       var d = this.dataList[this.getNameById(this.selectId)]
@@ -143,9 +139,6 @@ export default {
           return this.countryNameList[i].name
         }
       }
-      console.log(JSON.stringify(this.countryNameList))
-      console.log(id)
-      console.log('id error!')
     }
   }
 }
