@@ -98,8 +98,10 @@
   <div slot="header" 
   class="card-header" >
     <span>Attack Record</span>
-    <a v-for="(item,index) in search" :key="index" v-bind:href="item.url">
-      <i style="content: 'static/icons/Baidu.png'"></i>
+    <a v-for="(item,index) in search" :key="index" href="javascript:void(0)" 
+     @click="open(item.url+detailData.group)"
+     class="card-search-button">
+      <img :src=item.icon style="width:3vh;height:3vh;margin-left:10px;"></img>
     </a>
   </div>
   <div class="card-item-name">Time</div>
@@ -126,6 +128,7 @@
 </template>
 
 <script>
+import { shell } from 'electron'
 import { mapGetters } from 'vuex'
 import TimeAnalysisMapView from '@/components/MapView/TimeAnalysisMapView'
 import regionCountBar from '@/components/Charts/regionCountBar'
@@ -424,6 +427,9 @@ export default {
       this.$store.dispatch('changeTimeAnalysisMode', {mode: 'global', display: [], enable: true})
       this.loading = true
       this.initGlobalView()
+    },
+    open (url) {
+      shell.openExternal(url)
     }
   },
   watch: {
@@ -515,7 +521,7 @@ export default {
       .card-search-button {
         width: 5vh;
         height: 5vh;
-        // background-image: 'static/icons/Baidu.png';
+        content: 'static/icons/Baidu.png';
       }
     }
     .card-item-name{
